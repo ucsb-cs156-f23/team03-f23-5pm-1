@@ -53,4 +53,4 @@ const articlesFixtures = {
     ]
 };
 
-export { restaurantFixtures };
+export { articlesFixtures };
