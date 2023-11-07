@@ -1,14 +1,12 @@
 const menuItemReviewFixtures = {
-  oneMenuItemReview: [
-    {
-      id: 1,
-      itemId: 100,
-      reviewerEmail: 'Luke1@ucsb.edu',
-      stars: 3,
-      dateReviewed: '2022-01-02T12:00:00',
-      comments: 'Some comments about item 100',
-    },
-  ],
+  oneMenuItemReview: {
+    id: 1,
+    itemId: 100,
+    reviewerEmail: 'Luke1@ucsb.edu',
+    stars: 3,
+    dateReviewed: '2022-01-02T12:00:00',
+    comments: 'Some comments about item 100',
+  },
 
   threeMenuItemReviews: [
     {
