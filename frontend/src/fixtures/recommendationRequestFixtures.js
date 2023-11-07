@@ -5,7 +5,7 @@ const recommendationRequestFixtures = {
         "professorEmail": "PhillConrad@ucsb.edu",
         "explanation": "Masters",
         "dateNeeded": "2024-01-02T12:00:00",
-        "dateNeeded": "2023-09-13T12:00:00",
+        "dateRequested": "2023-09-13T12:00:00",
         "done": "false",
     },
     threeRequests: [
@@ -15,7 +15,7 @@ const recommendationRequestFixtures = {
             "professorEmail": "BillConrad@ucsb.edu",
             "explanation": "I need to kill Bill",
             "dateNeeded": "2024-01-02T12:00:10",
-            "dateNeeded": "2023-09-13T12:00:00",
+            "dateRequested": "2023-09-13T12:00:00",
             "done": "true",
         },
         {
@@ -24,7 +24,7 @@ const recommendationRequestFixtures = {
             "professorEmail": "ChillConrad@ucsb.edu",
             "explanation": "Hogwarts",
             "dateNeeded": "2024-07-12T20:05:00",
-            "dateNeeded": "2023-09-13T12:02:00",
+            "dateRequested": "2023-09-13T12:02:00",
             "done": "false",
         },
         {
@@ -33,7 +33,7 @@ const recommendationRequestFixtures = {
             "professorEmail": "DrillConrad@ucsb.edu",
             "explanation": "Going to Mars",
             "dateNeeded": "2124-08-13T18:00:00",
-            "dateNeeded": "2023-11-22T12:10:12",
+            "dateRequested": "2023-11-22T12:10:12",
             "done": "false",
         }
     ]
