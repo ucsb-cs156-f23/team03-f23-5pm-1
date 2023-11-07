@@ -40,4 +40,4 @@ const menuItemReviewFixtures = {
   ],
 };
 
-export { restaurantFixtures };
+export { menuItemReviewFixtures };
