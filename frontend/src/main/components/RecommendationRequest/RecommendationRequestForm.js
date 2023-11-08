@@ -2,7 +2,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" }) {
+function RecommendationRequestForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 
     // Stryker disable all
     const {
@@ -23,7 +23,7 @@ function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" })
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
     // Stryker disable next-line all
-    const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+    const email_regex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
 
     return (
 
@@ -31,13 +31,12 @@ function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" })
 
 
             <Row>
-
                 {initialContents && (
                     <Col>
                         <Form.Group className="mb-3" >
                             <Form.Label htmlFor="id">Id</Form.Label>
                             <Form.Control
-                                data-testid="UCSBDateForm-id"
+                                data-testid="RecommendationRequestForm-id"
                                 id="id"
                                 type="text"
                                 {...register("id")}
@@ -50,56 +49,86 @@ function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" })
 
                 <Col>
                     <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="quarterYYYYQ">Quarter YYYYQ</Form.Label>
+                        <Form.Label htmlFor="requesterEmail">Your Email</Form.Label>
                         <Form.Control
-                            data-testid="UCSBDateForm-quarterYYYYQ"
-                            id="quarterYYYYQ"
+                            data-testid="RecommendationRequestForm-requesterEmail"
+                            id="requesterEmail"
                             type="text"
-                            isInvalid={Boolean(errors.quarterYYYYQ)}
-                            {...register("quarterYYYYQ", { required: true, pattern: yyyyq_regex })}
+                            isInvalid={Boolean(errors.requesterEmail)}
+                            {...register("requesterEmail", { required: true, pattern: email_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.quarterYYYYQ && 'QuarterYYYYQ is required. '}
-                            {errors.quarterYYYYQ?.type === 'pattern' && 'QuarterYYYYQ must be in the format YYYYQ, e.g. 20224 for Fall 2022'}
+                            {errors.requesterEmail && 'Your email is required. '}
+                            {errors.requesterEmail?.type === 'pattern' && 'Your email must be in the format username@domainname.com, e.g. johndoe@gmail.com'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="localDateTime">Date (iso format)</Form.Label>
+                        <Form.Label htmlFor="professorEmail">Professor's Email</Form.Label>
                         <Form.Control
-                            data-testid="UCSBDateForm-localDateTime"
-                            id="localDateTime"
-                            type="datetime-local"
-                            isInvalid={Boolean(errors.localDateTime)}
-                            {...register("localDateTime", { required: true, pattern: isodate_regex })}
+                            data-testid="RecommendationRequestForm-professorEmail"
+                            id="professorEmail"
+                            type="text"
+                            isInvalid={Boolean(errors.professorEmail)}
+                            {...register("professorEmail", { required: true, pattern: email_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.localDateTime && 'LocalDateTime is required. '}
+                            {errors.professorEmail && 'The professor\'s email is required. '}
+                            {errors.professorEmail?.type === 'pattern' && 'The email must be in the format username@domainname.com, e.g. johndoe@gmail.com'}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+            </Row>
+
+            
+            <Row>
+                <Col>
+                    <Form.Group className="mb-3" >
+                        <Form.Label htmlFor="dateNeeded">Need By Date (iso format)</Form.Label>
+                        <Form.Control
+                            data-testid="RecommendationRequestForm-dateNeeded"
+                            id="dateNeeded"
+                            type="datetime-local"
+                            isInvalid={Boolean(errors.dateNeeded)}
+                            {...register("dateNeeded", { required: true, pattern: isodate_regex })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.dateNeeded && 'Need By Date is required. '}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="mb-3" >
+                        <Form.Label htmlFor="dateRequested">Date of Request (iso format)</Form.Label>
+                        <Form.Control
+                            data-testid="RecommendationRequestForm-dateRequested"
+                            id="dateRequested"
+                            type="datetime-local"
+                            isInvalid={Boolean(errors.dateRequested)}
+                            {...register("dateRequested", { required: true, pattern: isodate_regex })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.dateRequested && 'Date of Request is required. '}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
             </Row>
 
             <Row>
-
                 <Col>
-
-
-
-                    <Form.Group className="mb-3" >
-                        <Form.Label htmlFor="name">Name</Form.Label>
+                    <Form.Group className="mb-3">
+                        <Form.Label htmlFor="done">Done?</Form.Label>
                         <Form.Control
-                            data-testid="UCSBDateForm-name"
-                            id="name"
-                            type="text"
+                            data-testid="RecommendationRequestForm-done"
+                            id="done"
+                            type="checkbox" // Use "checkbox" for boolean input
+                            defaultValue={false} // Set the default value to false
                             isInvalid={Boolean(errors.name)}
-                            {...register("name", {
-                                required: "Name is required."
-                            })}
+                            {...register("done", {})} 
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.name?.message}
+                            {errors.done?.message}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -109,14 +138,14 @@ function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" })
                 <Col>
                     <Button
                         type="submit"
-                        data-testid="UCSBDateForm-submit"
+                        data-testid="RecommendationRequestForm-submit"
                     >
                         {buttonLabel}
                     </Button>
                     <Button
                         variant="Secondary"
                         onClick={() => navigate(-1)}
-                        data-testid="UCSBDateForm-cancel"
+                        data-testid="RecommendationRequestForm-cancel"
                     >
                         Cancel
                     </Button>
@@ -127,4 +156,4 @@ function UCSBDateForm({ initialContents, submitAction, buttonLabel = "Create" })
     )
 }
 
-export default UCSBDateForm;
+export default RecommendationRequestForm;
