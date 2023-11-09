@@ -117,6 +117,23 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
 
             <Row>
                 <Col>
+                    <Form.Group className="mb-3" >
+                        <Form.Label htmlFor="explanation">Reason</Form.Label>
+                        <Form.Control
+                            data-testid="UCSBDateForm-explanation"
+                            id="explanation"
+                            type="text"
+                            isInvalid={Boolean(errors.explanation)}
+                            {...register("explanation", {
+                                required: "explanation is required."
+                            })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.explanation?.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="done">Done?</Form.Label>
                         <Form.Control
