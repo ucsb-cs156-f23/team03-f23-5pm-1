@@ -112,7 +112,7 @@ function App() {
           <>
             <Route
               exact
-              path="/organizatinos/edit/:orgCode"
+              path="/organizations/edit/:orgCode"
               element={<UCSBOrganizationEditPage />}
             />
             <Route
