@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 import { useBackendMutation } from 'main/utils/useBackend';
+import { getAllByText } from '@testing-library/dom';
 
 const mockedNavigate = jest.fn();
 
@@ -12,6 +13,8 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockedNavigate,
 }));
+
+jest.mock('main/utils/useBackend');
 
 describe('UserTable tests', () => {
   const queryClient = new QueryClient();
@@ -190,5 +193,31 @@ describe('UserTable tests', () => {
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith('/MenuItemReview/edit/2')
     );
+  });
+
+  test('calls deleteMutation when delete button is clicked', async () => {
+    const currentUser = currentUserFixtures.adminUser;
+    // Arrange
+    const mockMutate = jest.fn();
+    useBackendMutation.mockReturnValue({
+      mutate: mockMutate,
+    });
+    const { getAllByText } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <MenuItemReviewTable
+            menuItemReviews={[menuItemReviewFixtures.oneMenuItemReview]}
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    // Act
+    const deleteButtons = getAllByText('Delete');
+    fireEvent.click(deleteButtons[1]);
+
+    // Assert
+    expect(mockMutate).toHaveBeenCalled();
   });
 });
