@@ -2,30 +2,34 @@ const diningCommonsMenuItemFixtures = {
     oneMenuItem:
     [
       {
-       "diningCommonsCode": "carillo",
+       "id": 1,
+        "diningCommonsCode": "ortega",
         "name": "cheeseburger",
         "station": "entree"      
       }
     ],
 
-    threeMenuItems:
+    threeRestaurants:
     [
         {
-            "diningCommonsCode": "portola",
-             "name": "pizza",
-             "station": "special entree",      
+            "id": 2,
+              "diningCommonsCode": "portola",
+              "name": "pizza",
+              "station": "special entree"      
         },
 
         {
-            "diningCommonsCode": "carillo",
-             "name": "cheeseburger",
-             "station": "entree"  
+            "id": 3,
+              "diningCommonsCode": "ortega",
+              "name": "cheeseburger",
+              "station": "entree"      
         },
 
         {
-            "diningCommonsCode": "ortega",
-             "name": "pasta",
-             "station": "entree"      
+            "id": 4,
+              "diningCommonsCode": "carillo",
+              "name": "pasta",
+              "station": "entree"      
         },
         
     ]
