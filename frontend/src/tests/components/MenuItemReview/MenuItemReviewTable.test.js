@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 import { useBackendMutation } from 'main/utils/useBackend';
-import { getAllByText } from '@testing-library/dom';
 
 const mockedNavigate = jest.fn();
 
@@ -202,7 +201,7 @@ describe('UserTable tests', () => {
     useBackendMutation.mockReturnValue({
       mutate: mockMutate,
     });
-    const { getAllByText } = render(
+    render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <MenuItemReviewTable
@@ -214,7 +213,7 @@ describe('UserTable tests', () => {
     );
 
     // Act
-    const deleteButtons = getAllByText('Delete');
+    const deleteButtons = screen.getAllByText('Delete');
     fireEvent.click(deleteButtons[1]);
 
     // Assert
