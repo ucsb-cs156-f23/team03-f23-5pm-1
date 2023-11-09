@@ -8,7 +8,7 @@ const diningCommonsMenuItemFixtures = {
       }
     ],
 
-    threeRestaurants:
+    threeMenuItems:
     [
         {
             "diningCommonsCode": "portola",
@@ -31,4 +31,4 @@ const diningCommonsMenuItemFixtures = {
     ]
 };
 
-export { restaurantFixtures };
+export { diningCommonsMenuItemFixtures };
