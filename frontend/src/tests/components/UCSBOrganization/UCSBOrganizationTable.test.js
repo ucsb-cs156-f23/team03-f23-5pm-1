@@ -4,7 +4,6 @@ import OrganizationTable from "main/components/UCSBOrganization/UCSBOrganization
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import UCSBOrganizationTableStories from "stories/components/UCSBOrganization/UCSBOrganizationTable.stories";
 
 const mockedNavigate = jest.fn();
 
