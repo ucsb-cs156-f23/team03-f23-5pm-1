@@ -74,7 +74,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             {...register("professorEmail", { required: true, pattern: email_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.professorEmail && 'The professor\'s email is required. '}
+                            {errors.professorEmail && 'The professor\'s email is required.'}
                             {errors.professorEmail?.type === 'pattern' && 'The email must be in the format username@domainname.com, e.g. johndoe@gmail.com'}
                         </Form.Control.Feedback>
                     </Form.Group>
@@ -125,7 +125,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             type="text"
                             isInvalid={Boolean(errors.explanation)}
                             {...register("explanation", {
-                                required: "explanation is required."
+                                required: "The reason is required."
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
