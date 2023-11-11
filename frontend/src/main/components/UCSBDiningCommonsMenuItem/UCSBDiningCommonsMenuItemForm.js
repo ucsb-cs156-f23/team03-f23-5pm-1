@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UCSBDiningCommonsMenuItemForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 
-    
+
     // Stryker disable all
     const {
         register,
@@ -14,7 +14,7 @@ function UCSBDiningCommonsMenuItemForm({ initialContents, submitAction, buttonLa
         { defaultValues: initialContents || {}, }
     );
     // Stryker restore all
-   
+
     const navigate = useNavigate();
 
     const testIdPrefix = "UCSBDiningCommonsMenuItemForm";
