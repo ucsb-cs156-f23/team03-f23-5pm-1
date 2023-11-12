@@ -9,7 +9,7 @@ const diningCommonsMenuItemFixtures = {
       }
     ],
 
-    threeRestaurants:
+    threeMenuItems:
     [
         {
             "id": 2,
