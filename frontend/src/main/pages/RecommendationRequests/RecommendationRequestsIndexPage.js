@@ -37,11 +37,7 @@ export default function RecommendationRequestsIndexPage() {
       <div className="pt-2">
         {createButton()}
         <h1>RecommendationRequests</h1>
-<<<<<<< HEAD
         <RecommendationRequestsTable requests={requests} currentUser={currentUser} />
-=======
-        <RecommendationRequestsTable dates={dates} currentUser={currentUser} />
->>>>>>> yv-RecommendationRequest-fixing-stories
       </div>
     </BasicLayout>
   )
