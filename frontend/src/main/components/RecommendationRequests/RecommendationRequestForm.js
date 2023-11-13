@@ -136,16 +136,16 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                 <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="done">Done?</Form.Label>
-                        <Form.Control
+                        <Form.Check
                             data-testid="RecommendationRequestForm-done"
                             id="done"
-                            type="checkbox" // Use "checkbox" for boolean input
-                            defaultValue={false} // Set the default value to false
-                            isInvalid={Boolean(errors.name)}
-                            {...register("done", {})} 
+                            type="checkbox"
+                            label="Check if done"
+                            {...register("done")} 
+                            isInvalid={Boolean(errors.done)}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.done?.message}
+                            {errors.done && 'Please check if it is done.'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
