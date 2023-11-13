@@ -3,27 +3,27 @@ const organizationFixtures = {
     orgCode: "SKY",
     orgTranslationShort: "Skydiving Club",
     orgTranslation: "Skydiving Club at UCSB",
-    inactive: true,
+    inactive: "true",
   },
 
   threeOrganizations: [
     {
-      orgCode: "APR",
+      orgCode: "ZPR",
       orgTranslationShort: "ZETA PHI RHO",
-      orgTranslation: "ZETA PHI RHO",
-      inactive: true,
+      orgTranslation: "ZETA-PHI-RHO",
+      inactive: "true",
     },
     {
       orgCode: "OSLI",
       orgTranslationShort: "Student Life",
       orgTranslation: "Office of Student Life",
-      inactive: true,
+      inactive: "true",
     },
     {
       orgCode: "KRC",
       orgTranslationShort: "Korean Radio Club",
       orgTranslation: "KOREAN RADIO CLUB",
-      inactive: true,
+      inactive: "true",
     },
   ],
 };
