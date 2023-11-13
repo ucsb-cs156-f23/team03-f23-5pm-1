@@ -74,7 +74,6 @@ export default function AppNavbar({
                 </Nav.Link>
               </>
             )}
-
             <Nav className="ml-auto">
               {currentUser && currentUser.loggedIn ? (
                 <>
