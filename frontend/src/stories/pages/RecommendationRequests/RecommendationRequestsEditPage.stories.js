@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -33,6 +32,4 @@ Default.parameters = {
         }),
     ],
 }
-
-
 
