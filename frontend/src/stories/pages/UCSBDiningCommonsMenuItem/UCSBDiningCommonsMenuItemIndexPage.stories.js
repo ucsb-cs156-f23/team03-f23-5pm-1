@@ -1,17 +1,17 @@
 import React from 'react';
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
+import { diningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 import { rest } from "msw";
 
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
+import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 
 export default {
-    title: 'pages/UCSBDates/UCSBDatesIndexPage',
-    component: UCSBDatesIndexPage
+    title: 'pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage',
+    component: UCSBDiningCommonsMenuItemIndexPage
 };
 
-const Template = () => <UCSBDatesIndexPage storybook={true}/>;
+const Template = () => <UCSBDiningCommonsMenuItemIndexPage storybook={true}/>;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -22,15 +22,15 @@ Empty.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
+        rest.get('/api/ucsbdiningcommonsmenuitems/all', (_req, res, ctx) => {
             return res(ctx.json([]));
         }),
     ]
 }
 
-export const ThreeItemsOrdinaryUser = Template.bind({});
+export const ThreeMenuItemsOrdinaryUser = Template.bind({});
 
-ThreeItemsOrdinaryUser.parameters = {
+ThreeMenuItemsOrdinaryUser.parameters = {
     msw: [
         rest.get('/api/currentUser', (_req, res, ctx) => {
             return res( ctx.json(apiCurrentUserFixtures.userOnly));
@@ -38,15 +38,15 @@ ThreeItemsOrdinaryUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
-            return res(ctx.json(ucsbDatesFixtures.threeDates));
+        rest.get('/api/ucsbdiningcommonsmenuitems/all', (_req, res, ctx) => {
+            return res(ctx.json(diningCommonsMenuItemFixtures.threeMenuItems));
         }),
     ],
 }
 
-export const ThreeItemsAdminUser = Template.bind({});
+export const ThreeMenuItemsAdminUser = Template.bind({});
 
-ThreeItemsAdminUser.parameters = {
+ThreeMenuItemsAdminUser.parameters = {
     msw: [
         rest.get('/api/currentUser', (_req, res, ctx) => {
             return res( ctx.json(apiCurrentUserFixtures.adminUser));
@@ -54,10 +54,10 @@ ThreeItemsAdminUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
-            return res(ctx.json(ucsbDatesFixtures.threeDates));
+        rest.get('/api/ucsbdiningcommonsmenuitems/all', (_req, res, ctx) => {
+            return res(ctx.json(diningCommonsMenuItemFixtures.threeMenuItems));
         }),
-        rest.delete('/api/ucsbdates', (req, res, ctx) => {
+        rest.delete('/api/ucsbdiningcommonsmenuitems', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),
