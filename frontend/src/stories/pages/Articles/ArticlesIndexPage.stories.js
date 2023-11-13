@@ -1,17 +1,17 @@
 import React from 'react';
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
+import { articlesFixtures } from "fixtures/articlesFixtures";
 import { rest } from "msw";
 
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
+import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 
 export default {
-    title: 'pages/UCSBDates/UCSBDatesIndexPage',
-    component: UCSBDatesIndexPage
+    title: 'pages/Articles/ArticlesIndexPage',
+    component: ArticlesIndexPage
 };
 
-const Template = () => <UCSBDatesIndexPage storybook={true}/>;
+const Template = () => <ArticlesIndexPage storybook={true}/>;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -22,7 +22,7 @@ Empty.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
+        rest.get('/api/articles/all', (_req, res, ctx) => {
             return res(ctx.json([]));
         }),
     ]
@@ -38,8 +38,8 @@ ThreeItemsOrdinaryUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
-            return res(ctx.json(ucsbDatesFixtures.threeDates));
+        rest.get('/api/articles/all', (_req, res, ctx) => {
+            return res(ctx.json(articlesFixtures.threeArticles));
         }),
     ],
 }
@@ -54,10 +54,10 @@ ThreeItemsAdminUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsbdates/all', (_req, res, ctx) => {
-            return res(ctx.json(ucsbDatesFixtures.threeDates));
+        rest.get('/api/articles/all', (_req, res, ctx) => {
+            return res(ctx.json(articlesFixtures.threeArticles));
         }),
-        rest.delete('/api/ucsbdates', (req, res, ctx) => {
+        rest.delete('/api/articles', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),
