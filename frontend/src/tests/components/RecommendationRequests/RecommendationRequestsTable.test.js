@@ -29,7 +29,7 @@ describe("UserTable tests", () => {
 
     );
 
-    const expectedHeaders = ["id", "Your Email", "Professor\'s Email",'Reason', 'Need By Date','Date of Request','Done?',];
+    const expectedHeaders = ["id", "Your Email", "Professor's Email",'Reason', 'Need By Date','Date of Request','Done?',];
     const expectedFields = ["id", 'requesterEmail', 'professorEmail','explanation','dateNeeded','dateRequested','done',];
     const testId = "RecommendationRequestsTable";
 
@@ -67,7 +67,7 @@ describe("UserTable tests", () => {
 
     );
 
-    const expectedHeaders = ["id", "Your Email", "Professor\'s Email",'Reason', 'Need By Date','Date of Request','Done?',];
+    const expectedHeaders = ["id", "Your Email", "Professor's Email",'Reason', 'Need By Date','Date of Request','Done?',];
     const expectedFields = ["id", 'requesterEmail', 'professorEmail','explanation','dateNeeded','dateRequested','done',];
     const testId = "RecommendationRequestsTable";
 
