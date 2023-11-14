@@ -148,9 +148,6 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             {...register("done")} 
                             isInvalid={Boolean(errors.done)}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.done && 'Please check if it is done.'}
-                        </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
             </Row>

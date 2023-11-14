@@ -6,7 +6,7 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/Recommendat
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function RecommendationRequestTable({ dates, currentUser }) {
+export default function RecommendationRequestsTable({ requests, currentUser }) {
 
     const navigate = useNavigate();
 
@@ -59,13 +59,13 @@ export default function RecommendationRequestTable({ dates, currentUser }) {
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestsDatesTable"));
-        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestsDatesTable"));
+        columns.push(ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestsTable"));
+        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestsTable"));
     } 
 
     return <OurTable
-        data={dates}
+        data={requests}
         columns={columns}
-        testid={"RecommendationRequestsDatesTable"}
+        testid={"RecommendationRequestsTable"}
     />;
 };

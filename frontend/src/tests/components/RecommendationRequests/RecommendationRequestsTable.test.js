@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
-import UCSBDatesTable from "main/components/UCSBDates/UCSBDatesTable"
+import { recommendationRequestsFixtures } from "fixtures/recommendationRequestsFixtures";
+import RecommendationRequestsTable from "main/components/RecommendationRequests/RecommendationRequestsTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -23,15 +23,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDatesTable dates={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
+          <RecommendationRequestsTable requests={recommendationRequestsFixtures.threeRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "QuarterYYYYQ", "Name", "Date"];
-    const expectedFields = ["id", "quarterYYYYQ", "name", "localDateTime"];
-    const testId = "UCSBDatesTable";
+    const expectedHeaders = ["id", "Your Email", "Professor\'s Email",'Reason', 'Need By Date','Date of Request','Done?',];
+    const expectedFields = ["id", 'requesterEmail', 'professorEmail','explanation','dateNeeded','dateRequested','done',];
+    const testId = "RecommendationRequestsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -61,15 +61,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDatesTable dates={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
+          <RecommendationRequestsTable requests={recommendationRequestsFixtures.threeRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "QuarterYYYYQ", "Name", "Date"];
-    const expectedFields = ["id", "quarterYYYYQ", "name", "localDateTime"];
-    const testId = "UCSBDatesTable";
+    const expectedHeaders = ["id", "Your Email", "Professor\'s Email",'Reason', 'Need By Date','Date of Request','Done?',];
+    const expectedFields = ["id", 'requesterEmail', 'professorEmail','explanation','dateNeeded','dateRequested','done',];
+    const testId = "RecommendationRequestsTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -101,20 +101,20 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDatesTable dates={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
+          <RecommendationRequestsTable requests={recommendationRequestsFixtures.threeRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    await waitFor(() => { expect(screen.getByTestId(`UCSBDatesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    await waitFor(() => { expect(screen.getByTestId(`RecommendationRequestsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
 
-    const editButton = screen.getByTestId(`UCSBDatesTable-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(`RecommendationRequestsTable-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
     
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbdates/edit/1'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/recommendationrequests/edit/1'));
 
   });
 
