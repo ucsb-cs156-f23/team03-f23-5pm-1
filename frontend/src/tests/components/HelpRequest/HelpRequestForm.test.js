@@ -48,12 +48,15 @@ describe("HelpRequestForm tests", () => {
         await screen.findByTestId("HelpRequestForm-requestTime");
         //const quarterYYYYQField = screen.getByTestId("HelpRequestForm-quarterYYYYQ");
         const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
+        const solvedField = screen.getByTestId("HelpRequestForm-solved");
         const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
         fireEvent.change(requestTimeField, { target: { value: 'bad-input' } });
+        fireEvent.change(solvedField, { target: { value: 'bad-input' } });
         fireEvent.click(submitButton);
 
-        await screen.findByText(/Date is required/);
+        await screen.findByText(/Must be 'true' or 'false'/);
+        await screen.findByText(/Request time must be in ISO format/);
     });
 
     test("Correct Error messsages on missing input", async () => {
@@ -101,14 +104,14 @@ describe("HelpRequestForm tests", () => {
         fireEvent.change(teamIdField, { target: { value: 'f23-8pm-1' } });
         fireEvent.change(tableOrBreakoutRoomField, { target: { value: '4' } });
         fireEvent.change(explanationField, { target: { value: 'Need help with team' } });
-        fireEvent.change(solvedField, { target: { value: 'True' } });
+        fireEvent.change(solvedField, { target: { value: 'true' } });
         fireEvent.change(requestTimeField, { target: { value: '2022-01-02T12:00' } });
         fireEvent.click(submitButton);
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-        expect(screen.queryByText(/QuarterYYYYQ must be in the format YYYYQ/)).not.toBeInTheDocument();
-        expect(screen.queryByText(/localDateTime must be in ISO format/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Must be true or false/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Request time must be in ISO format/)).not.toBeInTheDocument();
 
     });
 
