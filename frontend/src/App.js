@@ -7,9 +7,13 @@ import UCSBDatesIndexPage from 'main/pages/UCSBDates/UCSBDatesIndexPage';
 import UCSBDatesCreatePage from 'main/pages/UCSBDates/UCSBDatesCreatePage';
 import UCSBDatesEditPage from 'main/pages/UCSBDates/UCSBDatesEditPage';
 
-import RestaurantIndexPage from 'main/pages/Restaurants/RestaurantIndexPage';
-import RestaurantCreatePage from 'main/pages/Restaurants/RestaurantCreatePage';
-import RestaurantEditPage from 'main/pages/Restaurants/RestaurantEditPage';
+import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
+import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
+import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+
+import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
+import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
+import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
 import PlaceholderIndexPage from 'main/pages/Placeholder/PlaceholderIndexPage';
 import PlaceholderCreatePage from 'main/pages/Placeholder/PlaceholderCreatePage';
@@ -32,6 +36,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
+
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && <Route exact path="/admin/users" element={<AdminUsersPage />} />
+        }
         {hasRole(currentUser, "ROLE_ADMIN") && (
           <Route exact path="/admin/users" element={<AdminUsersPage />} />
         )}
@@ -123,6 +131,21 @@ function App() {
             />
           </>
         )}
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/recommendationrequests" element={<RecommendationRequestsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/recommendationrequests/edit/:id" element={<RecommendationRequestsEditPage />} />
+              <Route exact path="/recommendationrequests/create" element={<RecommendationRequestsCreatePage />} />
+            </>
+          )
+        }
       </Routes>
     </BrowserRouter>
   );
