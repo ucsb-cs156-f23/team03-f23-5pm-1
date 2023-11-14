@@ -56,7 +56,7 @@ ThreeItemsAdminUser.parameters = {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
         rest.get('/api/HelpRequest/all', (_req, res, ctx) => {
-            return res(ctx.json(ucsbDatesFixtures.threeDates));
+            return res(ctx.json(helpRequestFixtures.threeHelpRequests));
         }),
         rest.delete('/api/HelpRequest', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
