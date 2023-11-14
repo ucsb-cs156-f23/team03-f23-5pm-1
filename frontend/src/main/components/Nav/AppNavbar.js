@@ -1,7 +1,7 @@
-import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";
-import AppNavbarLocalhost from "main/components/Nav/AppNavbarLocalhost";
+import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { hasRole } from 'main/utils/currentUser';
+import AppNavbarLocalhost from 'main/components/Nav/AppNavbarLocalhost';
 
 export default function AppNavbar({
   currentUser,
@@ -11,8 +11,8 @@ export default function AppNavbar({
 }) {
   return (
     <>
-      {(currentUrl.startsWith("http://localhost:3000") ||
-        currentUrl.startsWith("http://127.0.0.1:3000")) && (
+      {(currentUrl.startsWith('http://localhost:3000') ||
+        currentUrl.startsWith('http://127.0.0.1:3000')) && (
         <AppNavbarLocalhost url={currentUrl} />
       )}
       <Navbar
@@ -48,7 +48,7 @@ export default function AppNavbar({
 
           <Navbar.Collapse className="justify-content-between">
             <Nav className="mr-auto">
-              {hasRole(currentUser, "ROLE_ADMIN") && (
+              {hasRole(currentUser, 'ROLE_ADMIN') && (
                 <NavDropdown
                   title="Admin"
                   id="appnavbar-admin-dropdown"
@@ -71,6 +71,15 @@ export default function AppNavbar({
                 </Nav.Link>
                 <Nav.Link as={Link} to="/organizations">
                   UCSB Organizations
+                </Nav.Link>
+                <Nav.Link as={Link} to="/menuitemreview">
+                  Menu Item Reviews
+                </Nav.Link>
+                <Nav.Link as={Link} to="/articles">
+                  Articles
+                </Nav.Link>
+                <Nav.Link as={Link} to="/ucsbdiningcommonsmenuitem">
+                  UCSBDiningCommonsMenuItem
                 </Nav.Link>
               </>
             )}

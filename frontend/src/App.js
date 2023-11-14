@@ -15,13 +15,25 @@ import PlaceholderIndexPage from 'main/pages/Placeholder/PlaceholderIndexPage';
 import PlaceholderCreatePage from 'main/pages/Placeholder/PlaceholderCreatePage';
 import PlaceholderEditPage from 'main/pages/Placeholder/PlaceholderEditPage';
 
-import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
-import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
-import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
+import UCSBOrganizationIndexPage from 'main/pages/UCSBOrganization/UCSBOrganizationIndexPage';
+import UCSBOrganizationCreatePage from 'main/pages/UCSBOrganization/UCSBOrganizationCreatePage';
+import UCSBOrganizationEditPage from 'main/pages/UCSBOrganization/UCSBOrganizationEditPage';
 
-import { hasRole, useCurrentUser } from "main/utils/currentUser";
+import MenuItemReviewIndexPage from 'main/pages/MenuItemReview/MenuItemReviewIndexPage';
+import MenuItemReviewCreatePage from 'main/pages/MenuItemReview/MenuItemReviewCreatePage';
+import MenuItemReviewEditPage from 'main/pages/MenuItemReview/MenuItemReviewEditPage';
 
-import "bootstrap/dist/css/bootstrap.css";
+import ArticlesIndexPage from 'main/pages/Articles/ArticlesIndexPage';
+import ArticlesCreatePage from 'main/pages/Articles/ArticlesCreatePage';
+import ArticlesEditPage from 'main/pages/Articles/ArticlesEditPage';
+
+import UCSBDiningCommonsMenuItemIndexPage from 'main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage';
+import UCSBDiningCommonsMenuItemCreatePage from 'main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage';
+import UCSBDiningCommonsMenuItemEditPage from 'main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage';
+
+import { hasRole, useCurrentUser } from 'main/utils/currentUser';
+
+import 'bootstrap/dist/css/bootstrap.css';
 // import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 
 function App() {
@@ -32,15 +44,16 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/profile" element={<ProfilePage />} />
-        {hasRole(currentUser, "ROLE_ADMIN") && (
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
           <Route exact path="/admin/users" element={<AdminUsersPage />} />
         )}
-        {hasRole(currentUser, "ROLE_USER") && (
+        {hasRole(currentUser, 'ROLE_USER') && (
           <>
             <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
           </>
         )}
-        {hasRole(currentUser, "ROLE_ADMIN") && (
+
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
           <>
             <Route
               exact
@@ -54,7 +67,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_USER") && (
+        {hasRole(currentUser, 'ROLE_USER') && (
           <>
             <Route
               exact
@@ -63,7 +76,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_ADMIN") && (
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
           <>
             <Route
               exact
@@ -77,7 +90,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_USER") && (
+        {hasRole(currentUser, 'ROLE_USER') && (
           <>
             <Route
               exact
@@ -86,7 +99,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_ADMIN") && (
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
           <>
             <Route
               exact
@@ -100,7 +113,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_USER") && (
+        {hasRole(currentUser, 'ROLE_USER') && (
           <>
             <Route
               exact
@@ -109,7 +122,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, "ROLE_ADMIN") && (
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
           <>
             <Route
               exact
@@ -120,6 +133,71 @@ function App() {
               exact
               path="/organizations/create"
               element={<UCSBOrganizationCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route
+              exact
+              path="/menuitemreview"
+              element={<MenuItemReviewIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/menuitemreview/edit/:id"
+              element={<MenuItemReviewEditPage />}
+            />
+            <Route
+              exact
+              path="/menuitemreview/create"
+              element={<MenuItemReviewCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route exact path="/articles" element={<ArticlesIndexPage />} />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/articles/edit/:id"
+              element={<ArticlesEditPage />}
+            />
+            <Route
+              exact
+              path="/articles/create"
+              element={<ArticlesCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route
+              exact
+              path="/ucsbdiningcommonsmenuitem"
+              element={<UCSBDiningCommonsMenuItemIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/ucsbdiningcommonsmenuitem/edit/:id"
+              element={<UCSBDiningCommonsMenuItemEditPage />}
+            />
+            <Route
+              exact
+              path="/ucsbdiningcommonsmenuitem/create"
+              element={<UCSBDiningCommonsMenuItemCreatePage />}
             />
           </>
         )}
