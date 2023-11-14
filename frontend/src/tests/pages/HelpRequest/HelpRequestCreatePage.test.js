@@ -63,7 +63,7 @@ describe("HelpRequestCreatePage tests", () => {
             requestTime: "2022-02-02T00:00"
         };
 
-        axiosMock.onPost("/api/helprequest/post").reply( 202, helpRequest );
+        axiosMock.onPost("/api/HelpRequest/post").reply( 202, helpRequest );
 
         render(
             <QueryClientProvider client={queryClient}>
