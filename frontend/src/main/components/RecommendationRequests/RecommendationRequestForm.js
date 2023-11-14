@@ -46,7 +46,8 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         </Form.Group>
                     </Col>
                 )}
-
+            </Row>
+            <Row>
                 <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="requesterEmail">Your Email</Form.Label>
@@ -59,7 +60,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.requesterEmail && 'Your email is required. '}
-                            {errors.requesterEmail?.type === 'pattern' && 'Your email must be in the format username@domainname.com, e.g. johndoe@gmail.com'}
+                            {errors.requesterEmail?.type === 'pattern' && 'Your email must be valid. '}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -74,8 +75,8 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             {...register("professorEmail", { required: true, pattern: email_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.professorEmail && 'The professor\'s email is required.'}
-                            {errors.professorEmail?.type === 'pattern' && 'The email must be in the format username@domainname.com, e.g. johndoe@gmail.com'}
+                            {errors.professorEmail && 'Professor email is required. '}
+                            {errors.professorEmail?.type === 'pattern' && 'Professor email must be valid. '}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -95,9 +96,11 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.dateNeeded && 'Need By Date is required. '}
+                            {errors.professorEmail?.type === 'pattern' && 'Need By Date must be in ISO format. '}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
+
                 <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="dateRequested">Date of Request (iso format)</Form.Label>
@@ -110,6 +113,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.dateRequested && 'Date of Request is required. '}
+                            {errors.professorEmail?.type === 'pattern' && 'Date of Request must be in ISO format. '}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -120,7 +124,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="explanation">Reason</Form.Label>
                         <Form.Control
-                            data-testid="UCSBDateForm-explanation"
+                            data-testid="RecommendationRequestForm-explanation"
                             id="explanation"
                             type="text"
                             isInvalid={Boolean(errors.explanation)}

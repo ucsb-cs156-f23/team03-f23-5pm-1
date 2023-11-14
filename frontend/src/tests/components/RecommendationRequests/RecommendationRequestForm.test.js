@@ -29,38 +29,12 @@ describe("RecommendationRequestForm tests", () => {
 
         render(
             <Router  >
-                <RecommendationRequestForm initialContents={recommendationRequestsFixtures.oneDate} />
+                <RecommendationRequestForm initialContents={recommendationRequestsFixtures.oneRequest} />
             </Router>
         );
         await screen.findByTestId(/RecommendationRequestForm-id/);
         expect(screen.getByText(/Id/)).toBeInTheDocument();
         expect(screen.getByTestId(/RecommendationRequestForm-id/)).toHaveValue("1");
-    });
-
-
-    test("Correct Error messsages on bad input", async () => {
-
-        render(
-            <Router  >
-                <RecommendationRequestForm />
-            </Router>
-        );
-        await screen.findByTestId("RecommendationRequestForm-requesterEmail");
-        const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
-        const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-        const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
-        const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
-        const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
-
-        fireEvent.change(requesterEmailField, { target: { value: 'bad-emailInput' } });
-        fireEvent.change(professorEmailField, { target: { value: 'bad-emailInput' } });
-        fireEvent.change(dateNeededField, { target: { value: 'bad-dateInput' } });
-        fireEvent.change(dateRequestedField, { target: { value: 'bad-dateInput' } });
-        
-        fireEvent.click(submitButton);
-
-        await screen.findByText(/'Your email must be in the format username@domainname.com, e.g. johndoe@gmail.com'/);
-        await screen.findByText(/'The email must be in the format username@domainname.com, e.g. johndoe@gmail.com'/);
     });
 
     test("Correct Error messsages on missing input", async () => {
@@ -75,13 +49,44 @@ describe("RecommendationRequestForm tests", () => {
 
         fireEvent.click(submitButton);
 
-        await screen.findByText(/Your Email is required/);
-        expect(screen.findByText(/The professor\'s email is required/)).toBeInTheDocument();
+        await screen.findByText(/Your email is required/);
+        expect(screen.getByText(/Professor email is required/)).toBeInTheDocument();
         expect(screen.getByText(/Need By Date is required/)).toBeInTheDocument();
         expect(screen.getByText(/Date of Request is required/)).toBeInTheDocument();
         expect(screen.getByText(/The reason is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Your email is required/)).toBeInTheDocument();
 
     });
+
+    test("Correct Error messsages on bad input", async () => {
+
+        render(
+            <Router  >
+                <RecommendationRequestForm />
+            </Router>
+        );
+        await screen.findByTestId("RecommendationRequestForm-dateRequested");
+        const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
+        const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
+        const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
+        const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
+        const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
+
+        fireEvent.change(requesterEmailField, { target: { value: 'bad-emailInput' } });
+        fireEvent.change(professorEmailField, { target: { value: 'bad-emailInput' } });
+        fireEvent.change(dateNeededField, { target: { value: 'bad-dateInput' } });
+        fireEvent.change(dateRequestedField, { target: { value: 'bad-dateInput' } });
+        
+        fireEvent.change(dateRequestedField, { target: { value: 'bad-input' } });
+
+        fireEvent.click(submitButton);
+
+        await screen.findByText(/Your email must be valid/);
+        expect(screen.getByText(/Professor email must be valid/)).toBeInTheDocument();
+        expect(screen.getByText(/Date of Request must be in ISO format/)).toBeInTheDocument();
+        expect(screen.getByText(/Need By Date must be in ISO format/)).toBeInTheDocument();
+    });
+
 
     test("No Error messsages on good input", async () => {
 
@@ -103,7 +108,7 @@ describe("RecommendationRequestForm tests", () => {
         const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
         fireEvent.change(requesterEmailField, { target: { value: 'yvangala@ucsb.edu' } });
-        fireEvent.change(requesterEmailField, { target: { value: 'phillConrad@ucsb.edu' } });
+        fireEvent.change(professorEmailField, { target: { value: 'phillConrad@ucsb.edu' } });
         fireEvent.change(dateNeededField, { target: { value: '2022-01-02T12:00' } });
         fireEvent.change(dateRequestedField, { target: { value: '2022-01-02T12:00' } });
         fireEvent.change(explanationField, { target: { value: 'Masters at UC Santa Barbie' } });
@@ -111,7 +116,7 @@ describe("RecommendationRequestForm tests", () => {
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-        expect(screen.queryByText(/in the format username@domainname.com/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/is required/)).not.toBeInTheDocument();
         expect(screen.queryByText(/must be in ISO format/)).not.toBeInTheDocument();
 
     });
