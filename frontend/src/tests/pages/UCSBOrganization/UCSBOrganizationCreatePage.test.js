@@ -67,7 +67,7 @@ describe("UCSBOrganizationCreatePage tests", () => {
     };
 
     axiosMock.onPost("/api/organizations/post").reply(202, organization);
-    
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
