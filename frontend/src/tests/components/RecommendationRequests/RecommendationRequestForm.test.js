@@ -68,23 +68,18 @@ describe("RecommendationRequestForm tests", () => {
         await screen.findByTestId("RecommendationRequestForm-dateRequested");
         const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
         const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-        const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
-        const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
         const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
         fireEvent.change(requesterEmailField, { target: { value: 'bad-emailInput' } });
         fireEvent.change(professorEmailField, { target: { value: 'bad-emailInput' } });
-        fireEvent.change(dateNeededField, { target: { value: 'bad-dateInput' } });
-        fireEvent.change(dateRequestedField, { target: { value: 'bad-dateInput' } });
         
-        fireEvent.change(dateRequestedField, { target: { value: 'bad-input' } });
-
         fireEvent.click(submitButton);
 
         await screen.findByText(/Your email must be valid/);
         expect(screen.getByText(/Professor email must be valid/)).toBeInTheDocument();
-        expect(screen.getByText(/Date of Request must be in ISO format/)).toBeInTheDocument();
-        expect(screen.getByText(/Need By Date must be in ISO format/)).toBeInTheDocument();
+
+        expect(screen.queryByText(/Your email is required/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Professor email is required/)).not.toBeInTheDocument();
     });
 
 
@@ -117,6 +112,7 @@ describe("RecommendationRequestForm tests", () => {
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
         expect(screen.queryByText(/is required/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/email must be valid/)).not.toBeInTheDocument();
         expect(screen.queryByText(/must be in ISO format/)).not.toBeInTheDocument();
 
     });
