@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -255,7 +255,8 @@
 <a name='L190'></a><a href='#L190'>190</a>
 <a name='L191'></a><a href='#L191'>191</a>
 <a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -266,23 +267,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -471,6 +473,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 &nbsp;
+    const boolean_regex = /^(true|false)$/;
     // Stryker disable next-line all
     //const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 &nbsp;
@@ -586,12 +589,11 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             id="solved"
                             type="text"
                             isInvalid={Boolean(errors.name)}
-                            {...register("solved", {
-                                required: "Input is required."
-                            })}
+                            {...register("solved", {required: true, pattern: boolean_regex })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.solved?.message}
+                            {errors.solved &amp;&amp; "Input is required."}
+                            {errors.solved?.type === 'pattern' &amp;&amp; "Must be 'true' or 'false'"}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
@@ -609,7 +611,8 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             {...register("requestTime", { required: true, pattern: isodate_regex })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.requestTime &amp;&amp; 'Date is required. '}
+                            {errors.requestTime &amp;&amp; 'Date is required.'}
+                            {errors.solved?.type === 'pattern' &amp;&amp; 'Request time must be in ISO format'}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
@@ -646,7 +649,7 @@ export default HelpRequestForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Nov 14 2023 19:40:45 GMT-0800 (Pacific Standard Time)
+                at Tue Nov 14 2023 19:41:42 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
