@@ -1,9 +1,9 @@
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import { useParams } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-import { useBackend, useBackendMutation } from "main/utils/useBackend";
-import { toast } from "react-toastify";
-import OrganizationForm from "main/components/UCSBOrganization/UCSBOrganizationForm";
+import BasicLayout from 'main/layouts/BasicLayout/BasicLayout';
+import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useBackend, useBackendMutation } from 'main/utils/useBackend';
+import { toast } from 'react-toastify';
+import OrganizationForm from 'main/components/UCSBOrganization/UCSBOrganizationForm';
 
 export default function OrganizationEditPage({ storybook = false }) {
   let { orgCode } = useParams();
@@ -14,11 +14,11 @@ export default function OrganizationEditPage({ storybook = false }) {
     _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    [`/api/organizations?orgCode=${orgCode}`],
+    [`/api/UCSBOrganization?orgCode=${orgCode}`],
     {
       // Stryker disable next-line all : GET is the default, so mutating this to "" doesn't introduce a bug
-      method: "GET",
-      url: `/api/organizations`,
+      method: 'GET',
+      url: `/api/UCSBOrganization`,
       params: {
         orgCode,
       },
@@ -26,8 +26,8 @@ export default function OrganizationEditPage({ storybook = false }) {
   );
 
   const objectToAxiosPutParams = (organization) => ({
-    url: "/api/organizations",
-    method: "PUT",
+    url: '/api/UCSBOrganization',
+    method: 'PUT',
     params: {
       orgCode: organization.orgCode,
     },
@@ -49,7 +49,7 @@ export default function OrganizationEditPage({ storybook = false }) {
     objectToAxiosPutParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    [`/api/organizations?orgCode=${orgCode}`]
+    [`/api/UCSBOrganization?orgCode=${orgCode}`]
   );
 
   const { isSuccess } = mutation;
@@ -69,7 +69,7 @@ export default function OrganizationEditPage({ storybook = false }) {
         {organization && (
           <OrganizationForm
             submitAction={onSubmit}
-            buttonLabel={"Update"}
+            buttonLabel={'Update'}
             initialContents={organization}
           />
         )}

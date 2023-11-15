@@ -1,18 +1,18 @@
-import React from "react";
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import React from 'react';
+import OurTable, { ButtonColumn } from 'main/components/OurTable';
 
-import { useBackendMutation } from "main/utils/useBackend";
+import { useBackendMutation } from 'main/utils/useBackend';
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/UCSBOrganizationUtils";
-import { useNavigate } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";
+} from 'main/utils/UCSBOrganizationUtils';
+import { useNavigate } from 'react-router-dom';
+import { hasRole } from 'main/utils/currentUser';
 
 export default function OrganizationTable({
   organizations,
   currentUser,
-  testIdPrefix = "OrganizationTable",
+  testIdPrefix = 'OrganizationTable',
 }) {
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function OrganizationTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/organizations/all"]
+    ['/api/UCSBOrganization/all']
   );
   // Stryker restore all
 
@@ -36,27 +36,27 @@ export default function OrganizationTable({
 
   const columns = [
     {
-      Header: "OrgCode",
-      accessor: "orgCode",
+      Header: 'OrgCode',
+      accessor: 'orgCode',
     },
     {
-      Header: "OrgTranslationShort",
-      accessor: "orgTranslationShort",
+      Header: 'OrgTranslationShort',
+      accessor: 'orgTranslationShort',
     },
     {
-      Header: "OrgTranslation",
-      accessor: "orgTranslation",
+      Header: 'OrgTranslation',
+      accessor: 'orgTranslation',
     },
     {
-      Header: "Inactive",
-      accessor: "inactive",
+      Header: 'Inactive',
+      accessor: 'inactive',
     },
   ];
 
-  if (hasRole(currentUser, "ROLE_ADMIN")) {
-    columns.push(ButtonColumn("Edit", "primary", editCallback, testIdPrefix));
+  if (hasRole(currentUser, 'ROLE_ADMIN')) {
+    columns.push(ButtonColumn('Edit', 'primary', editCallback, testIdPrefix));
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, testIdPrefix)
+      ButtonColumn('Delete', 'danger', deleteCallback, testIdPrefix)
     );
   }
 
