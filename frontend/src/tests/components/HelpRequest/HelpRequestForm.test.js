@@ -45,18 +45,27 @@ describe("HelpRequestForm tests", () => {
                 <HelpRequestForm initialContents={helpRequestFixtures.oneHelpRequest}/>
             </Router>
         );
-        await screen.findByTestId("HelpRequestForm-requestTime");
+        await screen.findByTestId("HelpRequestForm-solved");
         //const quarterYYYYQField = screen.getByTestId("HelpRequestForm-quarterYYYYQ");
         const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
         const solvedField = screen.getByTestId("HelpRequestForm-solved");
         const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-        fireEvent.change(requestTimeField, { target: { value: 'bad-input' } });
         fireEvent.change(solvedField, { target: { value: 'bad-input' } });
+        fireEvent.change(requestTimeField, { target: { value: 'bad-input' } });
         fireEvent.click(submitButton);
 
         await screen.findByText(/Must be 'true' or 'false'/);
         await screen.findByText(/Request time must be in ISO format/);
+        
+        fireEvent.change(requestTimeField, { target: { value: '2022-01-02T12:00' } });
+        
+        const badSolvedInputs = ["falseee", "tttrue", "bad-input"];
+        for (const solvedInput of badSolvedInputs) {
+            fireEvent.change(solvedField, { target: { value: solvedInput } });
+            fireEvent.click(submitButton);
+            await waitFor(() => { expect(screen.getByText(/Must be 'true' or 'false'/)).toBeInTheDocument()});
+        }
     });
 
     test("Correct Error messsages on missing input", async () => {
@@ -110,7 +119,7 @@ describe("HelpRequestForm tests", () => {
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-        expect(screen.queryByText(/Must be true or false/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Must be 'true' or 'false'/)).not.toBeInTheDocument();
         expect(screen.queryByText(/Request time must be in ISO format/)).not.toBeInTheDocument();
 
     });
