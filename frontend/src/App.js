@@ -7,25 +7,21 @@ import UCSBDatesIndexPage from 'main/pages/UCSBDates/UCSBDatesIndexPage';
 import UCSBDatesCreatePage from 'main/pages/UCSBDates/UCSBDatesCreatePage';
 import UCSBDatesEditPage from 'main/pages/UCSBDates/UCSBDatesEditPage';
 
-import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
-import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
-import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+import RecommendationRequestsIndexPage from 'main/pages/RecommendationRequests/RecommendationRequestsIndexPage';
+import RecommendationRequestsCreatePage from 'main/pages/RecommendationRequests/RecommendationRequestsCreatePage';
+import RecommendationRequestsEditPage from 'main/pages/RecommendationRequests/RecommendationRequestsEditPage';
 
-import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
-import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
-import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
-
-import PlaceholderIndexPage from 'main/pages/Placeholder/PlaceholderIndexPage';
-import PlaceholderCreatePage from 'main/pages/Placeholder/PlaceholderCreatePage';
-import PlaceholderEditPage from 'main/pages/Placeholder/PlaceholderEditPage';
+import RestaurantIndexPage from 'main/pages/Restaurants/RestaurantIndexPage';
+import RestaurantCreatePage from 'main/pages/Restaurants/RestaurantCreatePage';
+import RestaurantEditPage from 'main/pages/Restaurants/RestaurantEditPage';
 
 import UCSBOrganizationIndexPage from 'main/pages/UCSBOrganization/UCSBOrganizationIndexPage';
 import UCSBOrganizationCreatePage from 'main/pages/UCSBOrganization/UCSBOrganizationCreatePage';
 import UCSBOrganizationEditPage from 'main/pages/UCSBOrganization/UCSBOrganizationEditPage';
 
-import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
-import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
-import HelpRequestEditPage from "main/pages/HelpRequest/HelpRequestEditPage";
+import HelpRequestIndexPage from 'main/pages/HelpRequest/HelpRequestIndexPage';
+import HelpRequestCreatePage from 'main/pages/HelpRequest/HelpRequestCreatePage';
+import HelpRequestEditPage from 'main/pages/HelpRequest/HelpRequestEditPage';
 
 import MenuItemReviewIndexPage from 'main/pages/MenuItemReview/MenuItemReviewIndexPage';
 import MenuItemReviewCreatePage from 'main/pages/MenuItemReview/MenuItemReviewCreatePage';
@@ -95,29 +91,6 @@ function App() {
               exact
               path="/restaurants/create"
               element={<RestaurantCreatePage />}
-            />
-          </>
-        )}
-        {hasRole(currentUser, 'ROLE_USER') && (
-          <>
-            <Route
-              exact
-              path="/placeholder"
-              element={<PlaceholderIndexPage />}
-            />
-          </>
-        )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
-          <>
-            <Route
-              exact
-              path="/placeholder/edit/:id"
-              element={<PlaceholderEditPage />}
-            />
-            <Route
-              exact
-              path="/placeholder/create"
-              element={<PlaceholderCreatePage />}
             />
           </>
         )}
@@ -209,36 +182,52 @@ function App() {
             />
           </>
         )}
-        {
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/recommendationrequests" element={<RecommendationRequestsIndexPage />} />
-            </>
-          )
-        }
-        {
-          hasRole(currentUser, "ROLE_ADMIN") && (
-            <>
-              <Route exact path="/recommendationrequests/edit/:id" element={<RecommendationRequestsEditPage />} />
-              <Route exact path="/recommendationrequests/create" element={<RecommendationRequestsCreatePage />} />
-            </>
-          )
-        }
-        {
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/helprequest" element={<HelpRequestIndexPage />} />
-            </>
-          )
-        }
-        {
-          hasRole(currentUser, "ROLE_ADMIN") && (
-            <>
-              <Route exact path="/helprequest/edit/:id" element={<HelpRequestEditPage />} />
-              <Route exact path="/helprequest/create" element={<HelpRequestCreatePage />} />
-            </>
-          )
-        }
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route
+              exact
+              path="/recommendationrequests"
+              element={<RecommendationRequestsIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/recommendationrequests/edit/:id"
+              element={<RecommendationRequestsEditPage />}
+            />
+            <Route
+              exact
+              path="/recommendationrequests/create"
+              element={<RecommendationRequestsCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route
+              exact
+              path="/helprequest"
+              element={<HelpRequestIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/helprequest/edit/:id"
+              element={<HelpRequestEditPage />}
+            />
+            <Route
+              exact
+              path="/helprequest/create"
+              element={<HelpRequestCreatePage />}
+            />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
