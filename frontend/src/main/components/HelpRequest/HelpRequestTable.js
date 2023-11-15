@@ -50,7 +50,8 @@ export default function HelpRequestTable({ helprequest, currentUser }) {
         },
         {
             Header: 'Solved',
-            accessor: 'solved',
+            id: 'solved',
+            accessor: (row, _rowIndex) => String(row.solved) // hack needed for boolean values to show up
         },
         {
             Header: 'Request Time',

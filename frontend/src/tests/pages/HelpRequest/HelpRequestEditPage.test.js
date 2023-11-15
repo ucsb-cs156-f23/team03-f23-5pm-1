@@ -81,7 +81,7 @@ describe("HelpRequestEditPage tests", () => {
                 tableOrBreakoutRoom: "4",
                 requestTime: "2022-03-14T15:00",
                 explanation: "march fourteenth",
-                solved: false
+                solved: "true"
             });
             axiosMock.onPut('/api/HelpRequest').reply(200, {
                 id: "17",
@@ -90,7 +90,7 @@ describe("HelpRequestEditPage tests", () => {
                 tableOrBreakoutRoom: "5",
                 requestTime: "2022-12-25T08:00",
                 explanation: "bug",
-                solved: true
+                solved: "true"
             });
         });
 
@@ -132,7 +132,7 @@ describe("HelpRequestEditPage tests", () => {
             expect(tableOrBreakoutRoomField).toHaveValue("4");
             expect(requestTimeField).toHaveValue("2022-03-14T15:00");
             expect(explanationField).toHaveValue("march fourteenth");
-            expect(solvedField).toHaveValue("false");
+            expect(solvedField).toHaveValue("true");
             expect(submitButton).toBeInTheDocument();
         });
 
@@ -146,7 +146,7 @@ describe("HelpRequestEditPage tests", () => {
                 </QueryClientProvider>
             );
 
-            await screen.findByTestId("HelpRequestForm-id");
+            await screen.findByTestId("HelpRequestForm-requesterEmail");
 
             const idField = screen.getByTestId("HelpRequestForm-id");
             const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
@@ -163,32 +163,32 @@ describe("HelpRequestEditPage tests", () => {
             expect(tableOrBreakoutRoomField).toHaveValue("4");
             expect(requestTimeField).toHaveValue("2022-03-14T15:00");
             expect(explanationField).toHaveValue("march fourteenth");
-            expect(solvedField).toHaveValue("false");
+            expect(solvedField).toHaveValue("true");
 
             expect(submitButton).toBeInTheDocument();
 
             fireEvent.change(requesterEmailField, { target: { value: 'vinsonlin@ucsb.edu' } })
             fireEvent.change(teamIdField, { target: { value: 'coucheater' } })
             fireEvent.change(tableOrBreakoutRoomField, { target: { value: "5" } })
-            fireEvent.change(requestTimeField, { target: { value: "bug" } })
-            fireEvent.change(explanationField, { target: { value: "2022-12-25T08:00" } })
-            fireEvent.change(solvedField, { target: { value: "true" } })
+            fireEvent.change(explanationField, { target: { value: "bug" } })
+            fireEvent.change(requestTimeField, { target: { value: "2022-12-25T08:00" } })
+            fireEvent.change(solvedField, { target: { value: 'false' } })
 
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
             expect(mockToast).toBeCalledWith("HelpRequest Updated - id: 17 email: vinsonlin@ucsb.edu");
-            expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
+            await waitFor(() => expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" }));
 
             expect(axiosMock.history.put.length).toBe(1); // times called
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
                 requesterEmail: 'vinsonlin@ucsb.edu',
-                teamId: "couch eater",
+                teamId: "coucheater",
                 tableOrBreakoutRoom: "5",
                 requestTime: "2022-12-25T08:00",
                 explanation: "bug",
-                solved: true
+                solved: "false"
             })); // posted object
 
         });
