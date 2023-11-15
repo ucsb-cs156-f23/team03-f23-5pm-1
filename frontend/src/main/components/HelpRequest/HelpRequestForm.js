@@ -22,6 +22,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
+    const boolean_regex = /^(true|false)$/;
     // Stryker disable next-line all
     //const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
@@ -137,12 +138,11 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             id="solved"
                             type="text"
                             isInvalid={Boolean(errors.name)}
-                            {...register("solved", {
-                                required: "Input is required."
-                            })}
+                            {...register("solved", {required: true, pattern: boolean_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.solved?.message}
+                            {errors.solved && "Input is required."}
+                            {errors.solved?.type === 'pattern' && "Must be 'true' or 'false'"}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -160,7 +160,8 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             {...register("requestTime", { required: true, pattern: isodate_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.requestTime && 'Date is required. '}
+                            {errors.requestTime && 'Date is required.'}
+                            {errors.solved?.type === 'pattern' && 'Request time must be in ISO format'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
