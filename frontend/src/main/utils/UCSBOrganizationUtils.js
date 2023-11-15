@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 export function onDeleteSuccess(message) {
   console.log(message);
@@ -7,8 +7,8 @@ export function onDeleteSuccess(message) {
 
 export function cellToAxiosParamsDelete(cell) {
   return {
-    url: "/api/organizations",
-    method: "DELETE",
+    url: '/api/UCSBOrganization',
+    method: 'DELETE',
     params: {
       orgCode: cell.row.values.orgCode,
     },

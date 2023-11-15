@@ -1,16 +1,16 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import UCSBOrganizationCreatePage from 'main/pages/UCSBOrganization/UCSBOrganizationCreatePage';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { MemoryRouter } from 'react-router-dom';
 
-import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
-import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import axios from "axios";
-import AxiosMockAdapter from "axios-mock-adapter";
+import { apiCurrentUserFixtures } from 'fixtures/currentUserFixtures';
+import { systemInfoFixtures } from 'fixtures/systemInfoFixtures';
+import axios from 'axios';
+import AxiosMockAdapter from 'axios-mock-adapter';
 
 const mockToast = jest.fn();
-jest.mock("react-toastify", () => {
-  const originalModule = jest.requireActual("react-toastify");
+jest.mock('react-toastify', () => {
+  const originalModule = jest.requireActual('react-toastify');
   return {
     __esModule: true,
     ...originalModule,
@@ -19,8 +19,8 @@ jest.mock("react-toastify", () => {
 });
 
 const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => {
-  const originalModule = jest.requireActual("react-router-dom");
+jest.mock('react-router-dom', () => {
+  const originalModule = jest.requireActual('react-router-dom');
   return {
     __esModule: true,
     ...originalModule,
@@ -31,7 +31,7 @@ jest.mock("react-router-dom", () => {
   };
 });
 
-describe("UCSBOrganizationCreatePage tests", () => {
+describe('UCSBOrganizationCreatePage tests', () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   beforeEach(() => {
@@ -39,15 +39,15 @@ describe("UCSBOrganizationCreatePage tests", () => {
     axiosMock.reset();
     axiosMock.resetHistory();
     axiosMock
-      .onGet("/api/currentUser")
+      .onGet('/api/currentUser')
       .reply(200, apiCurrentUserFixtures.userOnly);
     axiosMock
-      .onGet("/api/systemInfo")
+      .onGet('/api/systemInfo')
       .reply(200, systemInfoFixtures.showingNeither);
   });
 
   const queryClient = new QueryClient();
-  test("renders without crashing", () => {
+  test('renders without crashing', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -57,16 +57,16 @@ describe("UCSBOrganizationCreatePage tests", () => {
     );
   });
 
-  test("on submit, makes request to backend, and redirects to /organizations", async () => {
+  test('on submit, makes request to backend, and redirects to /organizations', async () => {
     const queryClient = new QueryClient();
     const organization = {
-      orgCode: "SKY",
-      orgTranslationShort: "SKYDIVE UCSB",
-      orgTranslation: "Skydiving club at UCSB",
-      inactive: "false",
+      orgCode: 'SKY',
+      orgTranslationShort: 'SKYDIVE UCSB',
+      orgTranslation: 'Skydiving club at UCSB',
+      inactive: 'false',
     };
 
-    axiosMock.onPost("/api/organizations/post").reply(202, organization);
+    axiosMock.onPost('/api/UCSBOrganization/post').reply(202, organization);
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -77,51 +77,51 @@ describe("UCSBOrganizationCreatePage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("orgCode")).toBeInTheDocument();
+      expect(screen.getByLabelText('orgCode')).toBeInTheDocument();
     });
 
-    const orgCodeInput = screen.getByLabelText("orgCode");
+    const orgCodeInput = screen.getByLabelText('orgCode');
     expect(orgCodeInput).toBeInTheDocument();
 
     const orgTranslationShortInput = screen.getByLabelText(
-      "orgTranslationShort"
+      'orgTranslationShort'
     );
     expect(orgTranslationShortInput).toBeInTheDocument();
 
-    const orgTranslationInput = screen.getByLabelText("orgTranslation");
+    const orgTranslationInput = screen.getByLabelText('orgTranslation');
     expect(orgTranslationInput).toBeInTheDocument();
 
-    const inactiveInput = screen.getByLabelText("inactive");
+    const inactiveInput = screen.getByLabelText('inactive');
     expect(inactiveInput).toBeInTheDocument();
 
-    const createButton = screen.getByText("Create");
+    const createButton = screen.getByText('Create');
     expect(createButton).toBeInTheDocument();
 
-    fireEvent.change(orgCodeInput, { target: { value: "NEW" } });
+    fireEvent.change(orgCodeInput, { target: { value: 'NEW' } });
     fireEvent.change(orgTranslationShortInput, {
-      target: { value: "NEW CLUB" },
+      target: { value: 'NEW CLUB' },
     });
     fireEvent.change(orgTranslationInput, {
-      target: { value: "New club at ucsb" },
+      target: { value: 'New club at ucsb' },
     });
     fireEvent.change(inactiveInput, {
-      target: { value: "true" },
+      target: { value: 'true' },
     });
     fireEvent.click(createButton);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      orgCode: "NEW",
-      orgTranslationShort: "NEW CLUB",
-      orgTranslation: "New club at ucsb",
-      inactive: "true",
+      orgCode: 'NEW',
+      orgTranslationShort: 'NEW CLUB',
+      orgTranslation: 'New club at ucsb',
+      inactive: 'true',
     });
 
     // assert - check that the toast was called with the expected message
     expect(mockToast).toBeCalledWith(
-      "New organization Created - orgCode: SKY orgTranslationShort: SKYDIVE UCSB orgTranslation: Skydiving club at UCSB inactive: false"
+      'New organization Created - orgCode: SKY orgTranslationShort: SKYDIVE UCSB orgTranslation: Skydiving club at UCSB inactive: false'
     );
-    expect(mockNavigate).toBeCalledWith({ to: "/organizations" });
+    expect(mockNavigate).toBeCalledWith({ to: '/organizations' });
   });
 });

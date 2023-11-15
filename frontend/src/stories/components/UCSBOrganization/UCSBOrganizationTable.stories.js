@@ -1,11 +1,11 @@
-import React from "react";
-import OrganizationTable from "main/components/UCSBOrganization/UCSBOrganizationTable";
-import { organizationFixtures } from "fixtures/ucsbOrganizationFixtures";
-import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import { rest } from "msw";
+import React from 'react';
+import OrganizationTable from 'main/components/UCSBOrganization/UCSBOrganizationTable';
+import { organizationFixtures } from 'fixtures/ucsbOrganizationFixtures';
+import { currentUserFixtures } from 'fixtures/currentUserFixtures';
+import { rest } from 'msw';
 
 export default {
-  title: "components/UCSBOrganization/UCSBOrganizationTable",
+  title: 'components/UCSBOrganization/UCSBOrganizationTable',
   component: OrganizationTable,
 };
 
@@ -34,8 +34,8 @@ ThreeItemsAdminUser.args = {
 
 ThreeItemsAdminUser.parameters = {
   msw: [
-    rest.delete("/api/organizations", (req, res, ctx) => {
-      window.alert("DELETE: " + JSON.stringify(req.url));
+    rest.delete('/api/UCSBOrganization', (req, res, ctx) => {
+      window.alert('DELETE: ' + JSON.stringify(req.url));
       return res(ctx.status(200), ctx.json({}));
     }),
   ],
