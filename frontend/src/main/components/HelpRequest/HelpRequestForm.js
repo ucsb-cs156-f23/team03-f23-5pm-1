@@ -56,7 +56,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-requesterEmail"
                             id="requesterEmail"
                             type="text"
-                            isInvalid={Boolean(errors.name)}
+                            isInvalid={Boolean(errors.requesterEmail)}
                             {...register("requesterEmail", {
                                 required: "Email is required."
                             })}
@@ -76,7 +76,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-teamId"
                             id="teamId"
                             type="text"
-                            isInvalid={Boolean(errors.name)}
+                            isInvalid={Boolean(errors.teamId)}
                             {...register("teamId", {
                                 required: "Team ID is required."
                             })}
@@ -97,7 +97,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-tableOrBreakoutRoom"
                             id="tableOrBreakoutRoom"
                             type="text"
-                            isInvalid={Boolean(errors.name)}
+                            isInvalid={Boolean(errors.tableOrBreakoutRoom)}
                             {...register("tableOrBreakoutRoom", {
                                 required: "Table/Breakout room number is required."
                             })}
@@ -117,7 +117,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-explanation"
                             id="explanation"
                             type="text"
-                            isInvalid={Boolean(errors.name)}
+                            isInvalid={Boolean(errors.explanation)}
                             {...register("explanation", {
                                 required: "Explanation is required."
                             })}
@@ -137,7 +137,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-solved"
                             id="solved"
                             type="text"
-                            isInvalid={Boolean(errors.name)}
+                            isInvalid={Boolean(errors.solved)}
                             {...register("solved", {required: true, pattern: boolean_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -156,7 +156,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                             data-testid="HelpRequestForm-requestTime"
                             id="requestTime"
                             type="datetime-local"
-                            isInvalid={Boolean(errors.localDateTime)}
+                            isInvalid={Boolean(errors.requestTime)}
                             {...register("requestTime", { required: true, pattern: isodate_regex })}
                         />
                         <Form.Control.Feedback type="invalid">
