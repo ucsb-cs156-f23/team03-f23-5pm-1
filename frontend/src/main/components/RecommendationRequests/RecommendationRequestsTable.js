@@ -54,7 +54,7 @@ export default function RecommendationRequestsTable({ requests, currentUser }) {
         },
         {
             Header: 'Done?',
-            accessor: 'done',
+            accessor: (row, _rowIndex) => String(row.done) // hack needed for boolean values to show up
         }
     ];
 
