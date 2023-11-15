@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
